@@ -14,21 +14,36 @@ service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 
 # URL of the website you want to scrape
-url = ""
+url = "https://www.cineworld.ie/#/buy-tickets-by-cinema?in-cinema=0001&at=2024-09-26&view-mode=list"
 
 # Open the URL
 driver.get(url)
 
-# Wait for the dynamic content to load (adjust wait time as necessary)
+# Wait for the dynamic content to load
 try:
-    # Use WebDriverWait to wait until a specific element is present (e.g., h3.qb-movie-name)
-    movie_elements = WebDriverWait(driver, 10).until(
-        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "h3.qb-movie-name"))
+    # Wait for movie containers to load (assuming each movie is inside a container like a div)
+    movie_containers = WebDriverWait(driver, 10).until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div.row.qb-movie"))
+        # Update this selector based on the actual container
     )
 
-    # Extract the movie names
-    for movie in movie_elements:
-        print(movie.text)
+    # Initialize dictionary to store movie names and times
+    movies_with_times = {}
+
+    # Loop through each movie container
+    for container in movie_containers:
+        # Extract the movie name from the container
+        movie_name = container.find_element(By.CSS_SELECTOR, "h3.qb-movie-name").text
+
+        # Extract all movie times within the same container
+        time_elements = container.find_elements(By.CSS_SELECTOR, ".btn.btn-primary.btn-lg")
+        movie_times = [time.text for time in time_elements]  # Get the text for each time
+
+        # Store movie name and its list of times in the dictionary
+        movies_with_times[movie_name] = movie_times
+
+    # Print the result
+    print(movies_with_times)
 
 finally:
     # Close the browser
