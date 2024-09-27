@@ -3,6 +3,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime
+
+now = datetime.now()
+formatted_date = f"{now.year}-{now.month}-{now.day}"
 
 # Path to the WebDriver you downloaded (e.g., ChromeDriver)
 driver_path = "chromedriver.exe"
@@ -14,7 +18,7 @@ service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 
 # URL of the website you want to scrape
-url = "https://www.cineworld.ie/#/buy-tickets-by-cinema?in-cinema=0001&at=2024-09-26&view-mode=list"
+url = f"https://www.cineworld.ie/#/buy-tickets-by-cinema?in-cinema=0001&at={formatted_date}&view-mode=list"
 
 # Open the URL
 driver.get(url)
