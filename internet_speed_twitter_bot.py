@@ -13,13 +13,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 USERNAME = os.environ["USERNAME"]
 PASSWORD = os.environ["PASSWORD"]
 
-PROMISED_UP_SPEED = 10
-PROMISED_DOWN_SPEED = 150
+# Expected upload and download speeds
+PROMISED_UP_SPEED = ''
+PROMISED_DOWN_SPEED = ''
 
 
 class InternetSpeedTwitterBot:
 
     def __init__(self):
+        """ Initialize driver and necessary options"""
         self.options = Options()
         self.options.add_experimental_option("detach", True)
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
@@ -31,11 +33,14 @@ class InternetSpeedTwitterBot:
         """Tests internet speed using speedtest.net"""
         self.driver.get("https://www.speedtest.net/")
         self.driver.maximize_window()
+        # Accept policy popup
         accept_policy = self.wait.until((EC.presence_of_element_located((By.ID, "onetrust-accept-btn-handler"))))
         accept_policy.click()
+        # Start internet speed test
         test_internet_speed = self.wait.until((EC.presence_of_element_located((By.CLASS_NAME, "start-text"))))
         test_internet_speed.click()
         time.sleep(40)
+        # Assign resulting download and upload speeds
         self.down_speed = self.wait.until((EC.presence_of_element_located((By.CSS_SELECTOR, ".download-speed")))).text
         self.up_speed = self.wait.until((EC.presence_of_element_located((By.CSS_SELECTOR, ".upload-speed")))).text
 

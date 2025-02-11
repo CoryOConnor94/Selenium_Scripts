@@ -1,4 +1,3 @@
-# import os
 import os
 import time
 from selenium import webdriver
@@ -13,12 +12,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 USERNAME = os.environ["USERNAME"]
 PASSWORD = os.environ["PASSWORD"]
-TARGET_ACCOUNT = "rhodesian___ridgeback"
+TARGET_ACCOUNT = ""
 
 
 class InstaFollower:
 
     def __init__(self):
+        """ Initialize web driver and necessary options"""
         self.options = Options()
         self.options.add_experimental_option("detach", True)
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=self.options)
@@ -28,21 +28,26 @@ class InstaFollower:
         """Logs into instagram account"""
         self.driver.get("https://www.instagram.com/accounts/login/")
         time.sleep(5)
+        # Accept cookies
         accept_cookies = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "._a9--")))
         accept_cookies.click()
         time.sleep(5)
+        # Enter Username
         username_form = self.wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='loginForm']"
                                                                                   "/div/div[1]/div/label/input")))
         username_form.send_keys(USERNAME)
+        # Enter password
         password_form = self.wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='loginForm']"
                                                                                   "/div/div[2]/div/label/input")))
         password_form.send_keys(PASSWORD)
         login_button = self.wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='loginForm']/div/div[3]")))
         login_button.click()
         time.sleep(5)
+        # Don't save credentials
         dont_save_creds_button = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".x1i10hfl")))
         dont_save_creds_button.send_keys(Keys.ENTER)
         time.sleep(5)
+        # Dont turn on notifications
         dont_turn_on_notifications_button = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, "_a9--")))
         dont_turn_on_notifications_button.send_keys(Keys.ENTER)
         time.sleep(5)
@@ -75,10 +80,10 @@ class InstaFollower:
 
 def main():
     """Main flow of program"""
-    insta_follower = InstaFollower()
-    insta_follower.login()
-    insta_follower.find_followers()
-    insta_follower.follow()
+    insta_follower = InstaFollower()    # Create instance of instagram follower bot
+    insta_follower.login()      # Login to instagram
+    insta_follower.find_followers()     # Navigate to target insta page and find followers
+    insta_follower.follow()     # Follow targets followers
 
 
 if __name__ == "__main__":
