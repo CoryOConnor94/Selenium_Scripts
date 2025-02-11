@@ -1,7 +1,7 @@
 # Selenium Bot Automation Repository
 
 ## Overview
-This repository contains multiple bot automation scripts for various platforms, including Cookie Clicker, Instagram, Twitter, and LinkedIn. Each bot is designed to automate specific tasks using Selenium and other necessary tools.
+This repository contains multiple bot automation scripts for various platforms, including Cookie Clicking game, Instagram, Twitter, LinkedIn, and Cineworld. Each bot is designed to automate specific tasks using Selenium and other necessary tools.
 
 ## Bots Included
 
@@ -19,7 +19,7 @@ This Python bot automates the Cookie Clicker game using Selenium. It continuousl
 **Requirements:**
 Ensure you have the following installed:
 
-- Python 3.x
+- Python 3.8+
 - Google Chrome browser
 - ChromeDriver (automatically installed by `webdriver_manager`)
 
@@ -50,47 +50,140 @@ PLAY_TIME = 600 * 5   # Total playtime in seconds
 
 ### Instagram Bot
 **Description:**
-
-**Features:**
+This Python bot automates the process of following Instagram users using Selenium. It logs into an Instagram account, navigates to a target profile, and follows their followers. The bot is designed to streamline engagement and audience growth 
 
 **Requirements:**
+- Python 3.8+
+- Google Chrome browser
+- ChromeDriver (automatically installed by `webdriver_manager`)
+
+Install the required dependencies using:
+```sh
+pip install selenium webdriver-manager
+```
 
 **Usage:**
 
+Set up environment variables for security:
+```sh
+export USERNAME='your_instagram_username'
+export PASSWORD='your_instagram_password'
+```
+Run script using:
+``` sh
+python instagram_follower_bot.py
+```
+
 **Configuration:**
-
-**Troubleshooting:**
-
+Modify this constants to specify target instagram account
+```python
+TARGET_ACCOUNT = ""
+```
 ---
 
 ### Twitter Bot
 **Description:**
+This Python bot automates internet speed testing and tweets complaints if the speed is below the promised rate. It uses Selenium to interact with Speedtest.net and Twitter.
 
 **Features:**
-
+- Tests internet speed using Speedtest.net.
+- Logs into Twitter automatically.
+- Tweets a complaint to the ISP if speeds are lower than expected
+  
 **Requirements:**
-
+- Python 3.8+
+- Google Chrome browser
+- ChromeDriver (automatically installed by `webdriver_manager`)
+  
 **Usage:**
+Set up environment variables for security:
+```sh
+export USERNAME='your_twitter_username'
+export PASSWORD='your_twitter_password'
+```
+Run script using:
+``` sh
+python internet_speed_twitter_bot.py
+``` 
 
 **Configuration:**
-
-**Troubleshooting:**
-
+Modify these constants to specify expected upload and download speeds
+```python
+PROMISED_UP_SPEED = ''
+PROMISED_DOWN_SPEED = ''
+```
 ---
 
 ### LinkedIn Bot
 **Description:**
+This Python bot automates job searches on LinkedIn using Selenium. It logs into a LinkedIn account, navigates to Python developer job listings, and saves available job postings for later review.
 
 **Features:**
-
+- Logs into a LinkedIn account automatically.
+- Navigates to Python developer job listings.
+- Scrolls through job postings and saves them.
+- Handles login credentials securely.
+  
 **Requirements:**
+- Python 3.x
+- Google Chrome browser
+- ChromeDriver (automatically installed by webdriver_manager)
+
+Install the required dependencies using:
+```sh
+pip install selenium webdriver-manager
+```
 
 **Usage:**
+Set up environment variables for security:
+```sh
+export USERNAME='your_linkedin_username'
+export PASSWORD='your_linkedin_password'
+```
+Run script using:
+```sh
+python linkedin_job_applier.py
+```
 
 **Configuration:**
+Modify URL to target specific job listings
+```python
+URL = ""
+```
 
-**Troubleshooting:**
+---
 
+### Cineworld Scraping Bot
+**Description:**
+This Python bot scrapes movie listings and showtimes from Cineworld's website. It automates the retrieval of movie names and available screening times using Selenium
+
+**Features:**
+- Navigates to the Cineworld website.
+- Retrieves movie titles and their available showtimes.
+- Stores the collected data in a pandas DataFrame for easy access and manipulation.
+
+**Requirements:**
+- Python 3.8+
+- Google Chrome browser
+- ChromeDriver (automatically installed by webdriver_manager)
+- Required Python libraries:
+  Install dependencies using:
+  ```sh
+  pip install selenium webdriver-manager pandas
+  ```
+  
+**Usage:**
+```sh
+python cineworld_scraper.py
+```
+
+**Configuration:**
+Modify URL to target specific job listings
+```python
+url = ""
+```
+
+---
 ## License
 This project is open-source and available under the MIT License.
 
