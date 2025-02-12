@@ -178,7 +178,41 @@ python cineworld_scraper.py
 ```
 
 **Configuration:**
-Modify URL to target specific job listings
+Modify URL to target specific webpage
+```python
+url = ""
+```
+
+---
+
+### Audible Scraping Bot
+**Description:**
+This Python bot  extracts best-selling audiobook data from Audible. It uses Selenium to automate the extraction of book titles, authors, and lengths, saving the data into a CSV file
+
+**Features:**
+- Navigates to the Audible website.
+- Extracts title, author, and length of audiobooks.
+- Handles pagination to scrape multiple pages.
+- Saves data to csv file
+- Includes error handling for missing elements
+
+**Requirements:**
+- Python 3.8+
+- Google Chrome browser
+- ChromeDriver (automatically installed by webdriver_manager)
+- Required Python libraries:
+  Install dependencies using:
+  ```sh
+  pip install selenium webdriver-manager pandas
+  ```
+  
+**Usage:**
+```sh
+python audible_scraper.py
+```
+
+**Configuration:**
+Modify URL to target specific page
 ```python
 url = ""
 ```
