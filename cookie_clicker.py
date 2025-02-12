@@ -67,20 +67,15 @@ class CookieClicker:
                     self.timeout = time.time() + SECONDS_TO_WAIT
                     unlocked_enabled_products[-1].click()
 
-            # try:
-            #     # Attempt to print cookies being produced per second
-            #     cookies_per_second = self.driver.find_element(By.ID, "cookiesPerSecond")
-            #     print(f"Producing Cookies {cookies_per_second.text}")
-            #
-            # except StaleElementReferenceException:
-            #     # Handle stale element error by retrying
-            #     cookies_per_second = self.driver.find_element(By.ID, "cookiesPerSecond")
-            #     print(f"Producing Cookies {cookies_per_second.text}")
+
+def main():
+    """Main flow of the program"""
+    cookie_clicker_bot = CookieClicker()
+    time.sleep(5)
+    cookie_clicker_bot.find_big_cookie()
+    time.sleep(5)
+    cookie_clicker_bot.build_cookie_empire()
 
 
-# Initialize instance of cookie clicker bot
-cookie_clicker_bot = CookieClicker()
-time.sleep(5)   # Wait for page to load
-cookie_clicker_bot.find_big_cookie()    # Call method to navigate to cookie game and perform set up
-time.sleep(5)
-cookie_clicker_bot.build_cookie_empire()    # Call method to start game
+if __name__=='__main__':
+    main()

@@ -9,6 +9,7 @@ from selenium.webdriver.chrome.options import Options
 import pandas as pd
 from datetime import datetime
 
+
 class CineworldScraper:
 
     def __init__(self, url="https://www.cineworld.ie"):
